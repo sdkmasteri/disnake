@@ -38,10 +38,10 @@ _log = logging.getLogger(__name__)
 
 __all__ = (
     "AudioSource",
-    "PCMAudio",
     "FFmpegAudio",
-    "FFmpegPCMAudio",
     "FFmpegOpusAudio",
+    "FFmpegPCMAudio",
+    "PCMAudio",
     "PCMVolumeTransformer",
 )
 

@@ -35,11 +35,11 @@ if TYPE_CHECKING:
 
 
 __all__ = (
-    "Localized",
     "Localised",
-    "LocalizationValue",
     "LocalizationProtocol",
     "LocalizationStore",
+    "LocalizationValue",
+    "Localized",
 )
 
 MISSING = utils.MISSING

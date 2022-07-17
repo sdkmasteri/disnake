@@ -37,6 +37,11 @@ repos:
         exclude_types: [json, pofile]
         exclude: 'changelog/|py.typed|disnake/bin/COPYING|.github/PULL_REQUEST_TEMPLATE.md|LICENSE|MANIFEST.in|requirements/|requirements.txt'
 
+  - repo: https://github.com/aio-libs/sort-all
+    rev: v1.2.0
+    hooks:
+      - id: sort-all
+
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:

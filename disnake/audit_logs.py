@@ -31,8 +31,8 @@ from .permissions import PermissionOverwrite, Permissions
 from .threads import ForumTag, Thread
 
 __all__ = (
-    "AuditLogDiff",
     "AuditLogChanges",
+    "AuditLogDiff",
     "AuditLogEntry",
 )
 

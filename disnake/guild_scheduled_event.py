@@ -37,7 +37,7 @@ if TYPE_CHECKING:
     from .user import User
 
 
-__all__ = ("GuildScheduledEventMetadata", "GuildScheduledEvent")
+__all__ = ("GuildScheduledEvent", "GuildScheduledEventMetadata")
 
 
 class GuildScheduledEventMetadata:

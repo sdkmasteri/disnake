@@ -30,13 +30,13 @@ from .threads import Thread
 from .utils import maybe_coroutine, snowflake_time, time_snowflake
 
 __all__ = (
-    "ReactionIterator",
-    "HistoryIterator",
-    "BanIterator",
     "AuditLogIterator",
+    "BanIterator",
     "GuildIterator",
-    "MemberIterator",
     "GuildScheduledEventUserIterator",
+    "HistoryIterator",
+    "MemberIterator",
+    "ReactionIterator",
 )
 
 if TYPE_CHECKING:

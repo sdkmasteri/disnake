@@ -12,11 +12,11 @@ from .mixins import Hashable
 from .utils import MISSING, cached_slot_property, find, get, snowflake_time
 
 __all__ = (
-    "StickerPack",
-    "StickerItem",
-    "Sticker",
-    "StandardSticker",
     "GuildSticker",
+    "StandardSticker",
+    "Sticker",
+    "StickerItem",
+    "StickerPack",
 )
 
 if TYPE_CHECKING:

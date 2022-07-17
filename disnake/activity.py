@@ -11,12 +11,12 @@ from .enums import ActivityType, try_enum
 from .partial_emoji import PartialEmoji
 
 __all__ = (
-    "BaseActivity",
     "Activity",
-    "Streaming",
+    "BaseActivity",
+    "CustomActivity",
     "Game",
     "Spotify",
-    "CustomActivity",
+    "Streaming",
 )
 
 """If curious, this is the current schema for an activity.

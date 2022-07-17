@@ -54,9 +54,9 @@ from ..webhook.async_ import Webhook, async_context, handle_message_parameters
 
 __all__ = (
     "Interaction",
+    "InteractionDataResolved",
     "InteractionMessage",
     "InteractionResponse",
-    "InteractionDataResolved",
 )
 
 if TYPE_CHECKING:

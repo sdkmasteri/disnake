@@ -40,12 +40,12 @@ from .utils import _overload_with_permissions
 from .voice_client import VoiceClient, VoiceProtocol
 
 __all__ = (
-    "Snowflake",
-    "User",
-    "PrivateChannel",
+    "Connectable",
     "GuildChannel",
     "Messageable",
-    "Connectable",
+    "PrivateChannel",
+    "Snowflake",
+    "User",
 )
 
 VoiceProtocolT = TypeVar("VoiceProtocolT", bound=VoiceProtocol)

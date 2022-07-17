@@ -40,18 +40,18 @@ if TYPE_CHECKING:
     )
 
 __all__ = (
-    "Component",
     "ActionRow",
-    "Button",
     "BaseSelectMenu",
-    "StringSelectMenu",
-    "SelectMenu",
-    "UserSelectMenu",
-    "RoleSelectMenu",
-    "MentionableSelectMenu",
+    "Button",
     "ChannelSelectMenu",
+    "Component",
+    "MentionableSelectMenu",
+    "RoleSelectMenu",
+    "SelectMenu",
     "SelectOption",
+    "StringSelectMenu",
     "TextInput",
+    "UserSelectMenu",
 )
 
 C = TypeVar("C", bound="Component")

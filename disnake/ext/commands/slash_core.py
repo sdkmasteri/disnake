@@ -36,7 +36,7 @@ if TYPE_CHECKING:
 
 MISSING = utils.MISSING
 
-__all__ = ("InvokableSlashCommand", "SubCommandGroup", "SubCommand", "slash_command")
+__all__ = ("InvokableSlashCommand", "SubCommand", "SubCommandGroup", "slash_command")
 
 
 SlashCommandT = TypeVar("SlashCommandT", bound="InvokableSlashCommand")

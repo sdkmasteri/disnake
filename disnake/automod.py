@@ -50,12 +50,12 @@ if TYPE_CHECKING:
 
 __all__ = (
     "AutoModAction",
+    "AutoModActionExecution",
     "AutoModBlockMessageAction",
+    "AutoModRule",
     "AutoModSendAlertAction",
     "AutoModTimeoutAction",
     "AutoModTriggerMetadata",
-    "AutoModRule",
-    "AutoModActionExecution",
 )
 
 

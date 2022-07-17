@@ -30,10 +30,10 @@ if TYPE_CHECKING:
 
 
 __all__ = (
-    "StringSelect",
     "Select",
-    "string_select",
+    "StringSelect",
     "select",
+    "string_select",
 )
 
 

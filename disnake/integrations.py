@@ -10,12 +10,12 @@ from .user import User
 from .utils import MISSING, _get_as_snowflake, deprecated, parse_time, warn_deprecated
 
 __all__ = (
+    "BotIntegration",
+    "Integration",
     "IntegrationAccount",
     "IntegrationApplication",
     "PartialIntegration",
-    "Integration",
     "StreamIntegration",
-    "BotIntegration",
 )
 
 if TYPE_CHECKING:

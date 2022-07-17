@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 
     P = ParamSpec("P")
 
-__all__ = ("InvokableUserCommand", "InvokableMessageCommand", "user_command", "message_command")
+__all__ = ("InvokableMessageCommand", "InvokableUserCommand", "message_command", "user_command")
 
 
 class InvokableUserCommand(InvokableApplicationCommand):

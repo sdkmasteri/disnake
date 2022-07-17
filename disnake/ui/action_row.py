@@ -48,10 +48,10 @@ if TYPE_CHECKING:
 __all__ = (
     "ActionRow",
     "Components",
-    "MessageUIComponent",
-    "ModalUIComponent",
     "MessageActionRow",
+    "MessageUIComponent",
     "ModalActionRow",
+    "ModalUIComponent",
 )
 
 AnySelect = Union[

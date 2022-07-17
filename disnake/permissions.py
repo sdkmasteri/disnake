@@ -24,8 +24,8 @@ if TYPE_CHECKING:
 
 
 __all__ = (
-    "Permissions",
     "PermissionOverwrite",
+    "Permissions",
 )
 
 

@@ -12,8 +12,8 @@ from .permissions import Permissions
 from .utils import MISSING, _assetbytes_to_base64_data, _get_as_snowflake, snowflake_time
 
 __all__ = (
-    "RoleTags",
     "Role",
+    "RoleTags",
 )
 
 if TYPE_CHECKING:

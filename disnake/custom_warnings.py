@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 __all__ = (
-    "DiscordWarning",
     "ConfigWarning",
-    "SyncWarning",
+    "DiscordWarning",
     "LocalizationWarning",
+    "SyncWarning",
 )
 
 

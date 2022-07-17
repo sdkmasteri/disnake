@@ -15,9 +15,9 @@ from .partial_emoji import PartialEmoji, _EmojiTag
 from .utils import MISSING, _get_as_snowflake, _unique, parse_time, snowflake_time
 
 __all__ = (
+    "ForumTag",
     "Thread",
     "ThreadMember",
-    "ForumTag",
 )
 
 if TYPE_CHECKING:

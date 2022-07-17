@@ -87,8 +87,8 @@ if TYPE_CHECKING:
 
 __all__ = (
     "Client",
-    "SessionStartLimit",
     "GatewayParams",
+    "SessionStartLimit",
 )
 
 CoroT = TypeVar("CoroT", bound=Callable[..., Coroutine[Any, Any, Any]])
