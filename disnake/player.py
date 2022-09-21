@@ -20,6 +20,12 @@ from .errors import ClientException
 from .oggparse import OggStream
 from .opus import Encoder as OpusEncoder
 
+if sys.version_info >= (3, 11):
+    from .pyaudioop import mul as audio_mul
+else:
+    # deprecated in 3.11
+    from audioop import mul as audio_mul
+
 if TYPE_CHECKING:
     from typing_extensions import Self
 
@@ -666,7 +672,7 @@ class PCMVolumeTransformer(AudioSource, Generic[AT]):
 
     def read(self) -> bytes:
         ret = self.original.read()
-        return audioop.mul(ret, 2, min(self._volume, 2.0))
+        return audio_mul(ret, 2, min(self._volume, 2.0))
 
 
 class AudioPlayer(threading.Thread):
