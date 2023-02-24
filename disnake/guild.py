@@ -4195,7 +4195,7 @@ class Guild(Hashable):
         *,
         limit: int = 1,
         cache: bool = True,
-    ):
+    ) -> List[Member]:
         """|coro|
 
         Retrieves members that belong to this guild whose username or nickname starts with

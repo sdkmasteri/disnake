@@ -200,7 +200,7 @@ class WebhookAdapter:
 
             raise RuntimeError("Unreachable code in HTTP handling.")
 
-    def delete_webhook(
+    def delete_webhook(  # noqa: ANN201
         self,
         webhook_id: int,
         *,
@@ -211,7 +211,7 @@ class WebhookAdapter:
         route = Route("DELETE", "/webhooks/{webhook_id}", webhook_id=webhook_id)
         return self.request(route, session, reason=reason, auth_token=token)
 
-    def delete_webhook_with_token(
+    def delete_webhook_with_token(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -227,7 +227,7 @@ class WebhookAdapter:
         )
         return self.request(route, session, reason=reason)
 
-    def edit_webhook(
+    def edit_webhook(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -239,7 +239,7 @@ class WebhookAdapter:
         route = Route("PATCH", "/webhooks/{webhook_id}", webhook_id=webhook_id)
         return self.request(route, session, reason=reason, payload=payload, auth_token=token)
 
-    def edit_webhook_with_token(
+    def edit_webhook_with_token(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -256,7 +256,7 @@ class WebhookAdapter:
         )
         return self.request(route, session, reason=reason, payload=payload)
 
-    def execute_webhook(
+    def execute_webhook(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -281,7 +281,7 @@ class WebhookAdapter:
             route, session, payload=payload, multipart=multipart, files=files, params=params
         )
 
-    def get_webhook_message(
+    def get_webhook_message(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -298,7 +298,7 @@ class WebhookAdapter:
         )
         return self.request(route, session)
 
-    def edit_webhook_message(
+    def edit_webhook_message(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -318,7 +318,7 @@ class WebhookAdapter:
         )
         return self.request(route, session, payload=payload, multipart=multipart, files=files)
 
-    def delete_webhook_message(
+    def delete_webhook_message(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -335,7 +335,7 @@ class WebhookAdapter:
         )
         return self.request(route, session)
 
-    def fetch_webhook(
+    def fetch_webhook(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,
@@ -345,7 +345,7 @@ class WebhookAdapter:
         route = Route("GET", "/webhooks/{webhook_id}", webhook_id=webhook_id)
         return self.request(route, session=session, auth_token=token)
 
-    def fetch_webhook_with_token(
+    def fetch_webhook_with_token(  # noqa: ANN201
         self,
         webhook_id: int,
         token: str,

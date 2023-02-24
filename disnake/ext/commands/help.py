@@ -5,7 +5,7 @@ import copy
 import functools
 import itertools
 import re
-from typing import TYPE_CHECKING, Any, Callable, Iterable, Optional
+from typing import TYPE_CHECKING, Any, Callable, Iterable, List, Optional
 
 import disnake.utils
 
@@ -515,7 +515,7 @@ class HelpCommand:
         *,
         sort: bool = False,
         key: Optional[Callable[[Command[Any, Any, Any]], Any]] = None,
-    ):
+    ) -> List[Command[Any, Any, Any]]:
         """|coro|
 
         Returns a filtered list of commands and optionally sorts them.

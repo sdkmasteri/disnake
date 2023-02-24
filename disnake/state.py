@@ -634,7 +634,7 @@ class ConnectionState:
         user_ids: Optional[List[int]],
         cache: bool,
         presences: bool,
-    ):
+    ) -> List[Member]:
         guild_id = guild.id
         ws = self._get_websocket(guild_id)
         if ws is None:
