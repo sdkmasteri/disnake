@@ -140,6 +140,7 @@ select = [
     "D2",  # pydocstyle, docstring formatting
     "D4",  # pydocstyle, docstring structure/content
     # "ANN", # flake8-annotations
+    "ANN2", # flake8-annotations
     "S", # flake8-bandit
     "B", # flake8-bugbear
     "C4", # flake8-comprehensions
@@ -225,6 +226,12 @@ ignore = [
 ]
 "examples/basic_voice.py" = ["S104"] # possible binding to all interfaces
 "examples/views/tic_tac_toe.py" = ["E741"] # ambigious variable name: `O`
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
+ignore-fully-untyped = true
+suppress-dummy-args = true
+# suppress-none-returning = true
 
 [tool.ruff.flake8-pytest-style]
 fixture-parentheses = false
