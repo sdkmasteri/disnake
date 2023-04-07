@@ -20,7 +20,13 @@ from typing import (
 
 from .. import utils
 from ..app_commands import OptionChoice
-from ..channel import PartialMessageable, _threaded_guild_channel_factory
+from ..channel import (
+    DMChannel,
+    GroupChannel,
+    PartialMessageable,
+    _threaded_channel_factory,
+    _threaded_guild_channel_factory,
+)
 from ..enums import (
     ChannelType,
     ComponentType,
@@ -74,6 +80,7 @@ if TYPE_CHECKING:
     from ..mentions import AllowedMentions
     from ..state import ConnectionState
     from ..threads import Thread
+    from ..types.channel import PartialChannel as PartialChannelPayload
     from ..types.components import Modal as ModalPayload
     from ..types.interactions import (
         ApplicationCommandOptionChoice as ApplicationCommandOptionChoicePayload,
@@ -160,6 +167,7 @@ class Interaction:
         "client",
         "_app_permissions",
         "_permissions",
+        "_channel_data",
         "_state",
         "_session",
         "_original_response",
@@ -185,7 +193,12 @@ class Interaction:
         self.application_id: int = int(data["application_id"])
         self._app_permissions: int = int(data.get("app_permissions", 0))
 
-        self.channel_id: int = int(data["channel_id"])
+        self._channel_data: PartialChannelPayload = data[
+            "channel"
+        ]  # this is stored on the interaction as channel is a cached property
+        self.channel_id: int = int(
+            data["channel_id"]
+        )  # note: this can be replaced with data["channel"]["id"]
         self.guild_id: Optional[int] = utils._get_as_snowflake(data, "guild_id")
         self.locale: Locale = try_enum(Locale, data["locale"])
         guild_locale = data.get("guild_locale")
@@ -254,12 +267,34 @@ class Interaction:
         consider using :attr:`permissions` or :attr:`app_permissions` instead.
         """
         guild = self.guild
-        channel = guild and guild._resolve_channel(self.channel_id)
-        if channel is None:
-            # could be a thread channel in a guild, or a DM channel
-            type = None if self.guild_id is not None else ChannelType.private
-            return PartialMessageable(state=self._state, id=self.channel_id, type=type)
-        return channel  # type: ignore
+        channel = guild and guild._resolve_channel(self.data["channel"]["id"])
+        if channel is not None:
+            return channel  # type: ignore # cannot be a category channel
+        channel_data = self._channel_data
+        channel_cls, type = _threaded_channel_factory(channel_data["type"])
+        if channel_cls is not None:
+            try:
+                if channel_cls in (DMChannel, GroupChannel):
+                    channel = channel_cls(
+                        me=self.me,
+                        state=self._state,
+                        data=channel_data,
+                    )
+                else:
+                    guild = guild or Object(id=self.guild_id)
+                    channel = channel_cls(
+                        state=self._state,
+                        data=channel_data,
+                        guild=guild,
+                    )
+
+            except Exception:
+                pass
+            else:
+                return channel  # type: ignore
+        # could be a thread channel in a guild, or a DM channel
+        type = None if self.guild_id is not None else ChannelType.private
+        return PartialMessageable(state=self._state, id=self.channel_id, type=type)
 
     @property
     def permissions(self) -> Permissions:

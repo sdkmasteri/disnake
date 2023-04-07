@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Dict, List, Literal, Optional, TypedDict, Unio
 
 from typing_extensions import NotRequired
 
-from .channel import ChannelType
+from .channel import ChannelType, PartialChannel
 from .components import Component, Modal
 from .embed import Embed
 from .i18n import LocalizationDict
@@ -260,6 +260,7 @@ class _BaseUserInteraction(_BaseInteraction):
     # the docs specify `channel_id` as optional,
     # but it is assumed to always exist on non-ping interactions
     channel_id: Snowflake
+    channel: PartialChannel
     locale: str
     app_permissions: NotRequired[str]
     guild_id: NotRequired[Snowflake]
