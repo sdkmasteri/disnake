@@ -270,7 +270,25 @@ class VoiceKeepAliveHandler(KeepAliveHandler):
 
 class DiscordClientWebSocketResponse(aiohttp.ClientWebSocketResponse):
     async def close(self, *, code: int = 4000, message: bytes = b"") -> bool:
-        return await super().close(code=code, message=message)
+        result = await super().close(code=code, message=message)
+
+        if self.close_code == 1000:
+            # workaround for https://github.com/aio-libs/aiohttp/issues/8138, which itself is a cpython issue in <3.11.
+            # tl;dr: close code may be wrong. For dropped connections it should be 1006, it's 1000 in aiohttp 3.9.
+
+            # While the underlying socket transport gets closed, the SSL transport may not be closed yet,
+            # which makes aiohttp think the connection closed cleanly.
+            # If the connection was abruptly closed, we get an exception on the protocol,
+            # so check that instead.
+            try:
+                exc: Optional[Exception] = getattr(self._reader._protocol, "_exception", None)
+                if isinstance(exc, aiohttp.ServerDisconnectedError):
+                    self._close_code = 1006
+            except Exception:
+                # don't love this, but we're messing with aiohttp internals here.
+                pass
+
+        return result
 
 
 class HeartbeatWebSocket(Protocol):
