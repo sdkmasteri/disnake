@@ -204,7 +204,7 @@ class Interaction(Generic[ClientT]):
         self.version: int = data["version"]
         self.application_id: int = int(data["application_id"])
         self.guild_id: Optional[int] = utils._get_as_snowflake(data, "guild_id")
-        self._guild = data.get("guild")
+        self._guild: Optional[Mapping[str, Any]] = data.get("guild")
 
         self.locale: Locale = try_enum(Locale, data["locale"])
         guild_locale = data.get("guild_locale")
@@ -272,7 +272,16 @@ class Interaction(Generic[ClientT]):
         if self.guild_id is None:
             return None
 
-        return self._state._get_guild(self.guild_id) or Guild(data=self._guild, state=self._state)
+        guild = self._state._get_guild(self.guild_id)
+        if guild:
+            return guild
+
+        # create a guild mash
+        # honestly we should cache this for the duration of the interaction
+        # but not if we fetch it from the cache, just the result of this creation
+        guild = Guild(data=self._guild, state=self._state)
+        guild._add_role(Role(state=self._state, guild=guild, data={"id": 1, "name": "@everyone"}))
+        return guild
 
     @utils.cached_slot_property("_cs_me")
     def me(self) -> Union[Member, ClientUser]:
