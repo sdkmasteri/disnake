@@ -266,7 +266,7 @@ class Interaction(Generic[ClientT]):
             This object is created from the data provided by Discord, but it is not complete.
             The only populated attributes are:
                 - :attr:`Guild.id`
-                - :attr:`Guild.locale`
+                - :attr:`Guild.preferred_locale`
                 - :attr:`Guild.features`
         """
         if self.guild_id is None:
