@@ -42,7 +42,7 @@ from ..errors import (
     NotFound,
 )
 from ..flags import MessageFlags
-from ..guild import Guild
+from ..guild import Guild, PartialInteractionGuild
 from ..i18n import Localized
 from ..member import Member
 from ..message import Attachment, Message
@@ -282,14 +282,7 @@ class Interaction(Generic[ClientT]):
         # create a guild mash
         # honestly we should cache this for the duration of the interaction
         # but not if we fetch it from the cache, just the result of this creation
-        guild = Guild(data=self._guild, state=self._state)
-        guild._add_role(
-            Role(
-                state=self._state,
-                guild=guild,
-                data={"id": 1, "name": "@everyone"},  # type: ignore
-            )
-        )
+        guild = PartialInteractionGuild(data=self._guild, state=self._state, interaction=self)
         return guild
 
     @utils.cached_slot_property("_cs_me")
