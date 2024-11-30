@@ -2,15 +2,8 @@
 
 [![Disnake Banner](https://raw.githubusercontent.com/DisnakeDev/disnake/master/assets/banner.png)](https://disnake.dev/)
 
-disnake
+disnake-DVM F0rk of disnake
 =======
-<p align="center">
-    <img src="https://img.shields.io/github/actions/workflow/status/DisnakeDev/disnake/lint-test.yml?branch=master&style=flat-square"></img>
-    <a href="https://discord.gg/disnake"><img src="https://img.shields.io/discord/808030843078836254?style=flat-square&color=5865f2&logo=discord&logoColor=ffffff&label=discord" alt="Discord server invite" /></a>
-    <a href="https://pypi.org/project/disnake/"><img src="https://img.shields.io/pypi/v/disnake.svg?style=flat-square" alt="PyPI version info" /></a>
-    <a href="https://pypi.org/project/disnake/"><img src="https://img.shields.io/pypi/pyversions/disnake.svg?style=flat-square" alt="PyPI supported Python versions" /></a>
-    <a href="https://github.com/DisnakeDev/disnake/commits"><img src="https://img.shields.io/github/commit-activity/w/DisnakeDev/disnake.svg?style=flat-square" alt="Commit activity" /></a>
-</p>
 
 A modern, easy to use, feature-rich, and async-ready API wrapper for Discord written in Python.
 
@@ -21,36 +14,33 @@ Key Features
 - Type-safety measures.
 - [FastAPI](https://fastapi.tiangolo.com/)-like slash command syntax.
 
-<sup>The syntax and structure of `discord.py 2.0` is preserved.</sup>
+Voice Messages
+--------------
+#Slash and Context Menu Commands Example
 
-Installing
-----------
+```py
+import disnake
+import disnake.discordvm
+from disnake.ext import commands
+intents = disnake.Intents.all()
+bot = commands.InteractionBot(intents=intents)
+vm = disnake.discordvm.VoiceMessage(bot=bot)
+@bot.message_command(name="Voice")
+async def voice_ctx(inter: disnake.MessageCommandInteraction, message: disnake.Message):
+    await inter.response.defer()
+    await inter.channel.purge(limit=1) #type: ignore
+    for audio in message.attachments:
+        await vm.send(file=audio, channel_id=inter.channel_id)
 
-**Python 3.8 or higher is required.**
+@bot.slash_command(name="voice")
+async def voice(ctx: disnake.ApplicationCommandInteraction, audio: disnake.Attachment):
+    await ctx.response.defer()
+    await ctx.channel.purge(limit=1) #type: ignore
+    await vm.send(file=audio, channel_id=ctx.channel_id)
 
-To install the library without full voice support, you can just run the
-following command:
-
-``` sh
-# Linux/macOS
-python3 -m pip install -U disnake
-
-# Windows
-py -3 -m pip install -U disnake
+if __name__ == '__main__':
+    bot.run(token)
 ```
-
-Installing `disnake` with full voice support requires you to replace `disnake` here, with `disnake[voice]`. To learn more about voice support (or installing the development version), please visit [this section of our guide](https://guide.disnake.dev/prerequisites/installing-disnake/).
-
-(You can optionally install [PyNaCl](https://pypi.org/project/PyNaCl/) for voice support.)
-
-Note that voice support on Linux requires installation of `libffi-dev` and `python-dev` packages, via your preferred package manager (e.g. `apt`, `dnf`, etc.) before running the following commands.
-
-Versioning
-----------
-
-This project does **not** quite follow semantic versioning; for more details, see [version guarantees](https://docs.disnake.dev/en/latest/version_guarantees.html).
-
-To be on the safe side and avoid unexpected breaking changes, pin the dependency to a minor version (e.g. `disnake==a.b.*` or `disnake~=a.b.c`) or an exact version (e.g. `disnake==a.b.c`).
 
 Quick Example
 -------------
@@ -102,7 +92,7 @@ async def ping(ctx):
 bot.run("BOT_TOKEN")
 ```
 
-You can find more examples in the [examples directory](https://github.com/DisnakeDev/disnake/tree/master/examples).
+You can find more examples in the [examples directory](https://github.com/sdkmasteri/disnake-DVM/tree/master/examples).
 
 <br>
 <p align="center">
