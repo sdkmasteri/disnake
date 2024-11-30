@@ -3,7 +3,6 @@ import disnake.discordvm
 from disnake.ext import commands
 intents = disnake.Intents.all()
 bot = commands.InteractionBot(intents=intents)
-bot.load_extensions("cogs")
 vm = disnake.discordvm.VoiceMessage(bot=bot)
 @bot.message_command(name="Voice")
 async def voice_ctx(inter: disnake.MessageCommandInteraction, message: disnake.Message):
