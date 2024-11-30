@@ -34,5 +34,8 @@ __pypackages__/
 .pdm.toml
 .pdm-python
 pdm.lock
-
+*.ogg
+main.py
+testingshit.py
+cogs/
 !test_bot/locale/*.json
