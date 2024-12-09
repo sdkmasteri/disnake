@@ -1,6 +1,7 @@
 import requests
 from disnake import Attachment
 from disnake.ext import commands
+from typing import Union
 from typing import Any
 import base64 as b64
 import wave
@@ -40,7 +41,7 @@ class Cayonar():
                 
                 
 class VoiceMessage:
-    def __init__(self, bot: commands.Bot | commands.InteractionBot) -> None:
+    def __init__(self, bot: Union[commands.Bot, commands.InteractionBot, commands.AutoShardedBot]) -> None:
       self.bot = bot
     async def send(self, file: Attachment, channel_id: int):
       token = await self.bot.get_token()
@@ -80,4 +81,4 @@ class VoiceMessage:
           }
         ]
       }
-      await canar.cayona(method='post', path=f'channels/{channel_id}/messages', content_type=None, data=datapost)
+      await canar.cayona(method='post', path=f'channels/{channel_id}/messages', content_type="application/json", data=datapost)
